@@ -2,7 +2,10 @@
 # Complexidade de tempo: O(2^n) — exponencial
 # Complexidade de espaço: O(n) — pilha de recursão
 
+import time
 def mochila(i, W, pesos, valores):
+    chamadas[0] += 1
+
     """
     Resolve o Problema da Mochila de forma recursiva.
 
@@ -37,21 +40,29 @@ def mochila(i, W, pesos, valores):
 if __name__ == "__main__":
     # Itens: (peso, valor)
     itens = [
-        (2, 6),   # item 1
-        (2, 10),  # item 2
-        (3, 12),  # item 3
+        (1, 60),
+        (3, 150),
+        (3, 120),
+        (4, 160),
+        (5, 200),
+        (5, 150),
+        (6, 60),
     ]
 
     n = len(itens)
-    capacidade = 5
+    capacidade = 10
 
     # Listas 1-indexadas (índice 0 não é usado)
     pesos   = [0] + [item[0] for item in itens]
     valores = [0] + [item[1] for item in itens]
-
+    chamadas = [0]
+    inicio = time.perf_counter()
     resultado = mochila(n, capacidade, pesos, valores)
+    fim = time.perf_counter()
 
     print("=== Problema da Mochila — Solução Recursiva ===")
     print(f"Itens disponíveis : {itens}")
     print(f"Capacidade        : {capacidade}")
     print(f"Valor máximo      : {resultado}")
+    print(f"Tempo de execução : {fim - inicio:.6f} segundos")
+    print(f"Número de chamadas : {chamadas[0]}")
